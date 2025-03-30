@@ -1,0 +1,10 @@
+---
+title: "Reforging : A Method for Constructing a Linguistically Valid Japanese CCG Treebank."
+description: "In Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics: Student Research Workshop."
+auther: "Asa Tomita, Hitomi Yanaka, Daisuke Bekki"
+pubDate: "March 19 2024"
+tags: []
+---
+
+
+The linguistic validity of Combinatory Categorial Grammar (CCG) parsing results relies heavily on treebanks for training and evaluation, so the treebank construction is crucial. Yet the current Japanese CCG treebank is known to have inaccuracies in its analyses of Japanese syntactic structures, including passive and causative constructions. While ABCTreebank, a treebank for ABC grammar, has been made to improve the analysis, particularly of argument structures, it lacks the detailed syntactic features required for Japanese CCG. In contrast, the Japanese CCG parser, lightblue, efficiently provides detailed syntactic features, but it does not accurately capture argument structures. We propose a method to generate a linguistically valid Japanese CCG treebank with detailed information by combining the strengths of ABCTreebank and lightblue. We develop an algorithm that filters lightblue’s lexical items using ABCTreebank, effectively converting lightblue output into a linguistically valid CCG treebank. To evaluate our treebank, we manually evaluate CCG syntactic structures and semantic representations and analyze conversion rates.
