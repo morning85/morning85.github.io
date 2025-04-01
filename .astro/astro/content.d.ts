@@ -151,16 +151,16 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
-"matsubara_nlp2025.md": {
-	id: "matsubara_nlp2025.md";
-  slug: "matsubara_nlp2025";
+"eacl2023.md": {
+	id: "eacl2023.md";
+  slug: "eacl2023";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
-"post3.md": {
-	id: "post3.md";
-  slug: "post3";
+"matsubara_nlp2025.md": {
+	id: "matsubara_nlp2025.md";
+  slug: "matsubara_nlp2025";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

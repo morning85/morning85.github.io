@@ -6,13 +6,15 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 export interface Props extends BlogSchema {}
 
-const { title, auther, description, pubDate, updatedDate, heroImage, badge, tags = [] } = Astro.props;
+const { title, auther, description, pubDate, updatedDate, heroImage, paperUrl, slideUrl, badge, tags = [] } = Astro.props;
 dayjs.extend(localizedFormat);
 const displayDate = dayjs(pubDate).format("ll")
+const slideFilePath = `../public/slide/${slideUrl}.pdf`;
+
 import { Image } from "astro:assets";
 ---
 
-<BaseLayout title={title} auther={auther} description={description} image={heroImage}, ogType="article">
+<BaseLayout title={title} auther={auther} description={description} image={heroImage}, paperUrl={paperUrl}, slideUrl={slideUrl}, ogType="article">
   <main class="md:flex md:justify-center">
     <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
       <!-- {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6" />} -->
@@ -36,6 +38,22 @@ import { Image } from "astro:assets";
             Last updated on <time>{updatedDate}</time>{" "}
           </div>
         )
+      }
+      {
+        paperUrl && (
+          <a href={paperUrl} target="_blank" class="badge badge-primary no-underline  my-1">
+            {" "}
+            Paper
+          </a>
+          )
+      }
+       {
+        slideUrl && (
+          <a href={slideFilePath} target="_blank" class="badge badge-primary no-underline  my-1">
+            {" "}
+            Slide
+          </a>
+          )
       }
       <div class="divider my-2"></div>
       <slot />
