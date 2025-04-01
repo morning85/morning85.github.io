@@ -3,8 +3,7 @@ title: "言語学的に妥当なCCGツリーバンク構築と評価"
 auther: "富田 朝, 谷中 瞳, 戸次 大介"
 description: "言語処理学会 第30回年次大会(NLP2024), 2024"
 pubDate: "March 12 2024"
-heroImage: "/post_img.webp"
-tags: ["Non-Peer-Reviewed","国際学会"]
+tags: ["Non-Peer-Reviewed","国内学会"]
 paperUrl: "https://www.anlp.jp/proceedings/annual_meeting/2024/pdf_dir/D2-2.pdf"
 slideUrl: "NLP2024_slide"
 
