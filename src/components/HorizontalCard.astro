@@ -1,7 +1,10 @@
 ---
-const { title, auther, img, desc, url, badge, tags, pubDate, target = "_blank" } = Astro.props;
+const { title, auther, img, desc, url, badge, tags, pubDate, paperUrl, slideUrl,target = "_blank" } = Astro.props;
 import { Image } from "astro:assets";
 const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
+
+const slideFilePath = `../public/slide/${slideUrl}.pdf`;
+
 ---
 
 <div
@@ -31,6 +34,22 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
         </h2>
         <p class="py-1 text-1xl">{pubDate}</p>
         <p class="py-1 text-1xl">{desc}</p>
+        {
+          paperUrl && (
+            <a href={paperUrl} target="_blank" class="badge badge-primary no-underline  my-1">
+              {" "}
+              Paper
+            </a>
+            )
+        }
+         {
+          slideUrl && (
+            <a href={slideFilePath} target="_blank" class="badge badge-primary no-underline  my-1">
+              {" "}
+              Slide
+            </a>
+            )
+        }
         <div class="card-actions justify-end">
           {
             tags &&
@@ -41,6 +60,7 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
               ))
           }
         </div>
+
       </div>
     </div>
   </a>

@@ -6,6 +6,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
 import HorizontalShopItem from "@components/HorizontalShopItem.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug"
+import dayjs from "dayjs";
 
 
 // const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -17,6 +18,10 @@ const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const last_posts = posts.slice(0, 3);
+
+dayjs.extend(localizedFormat);
+import localizedFormat from "dayjs/plugin/localizedFormat";
+// const displayDate = dayjs(pubDate).format("ll")
 ---
 
 
@@ -114,7 +119,11 @@ const last_posts = posts.slice(0, 3);
           title={post.data.title}
           auther={post.data.auther}
           desc={post.data.description}
+          pubDate={dayjs(post.data.pubDate).format("ll")}
           url={"/blog/" + createSlug(post.data.title, post.slug)}
+          paperUrl={post.data.paperUrl}
+          slideUrl={post.data.slideUrl}
+          tags={post.data.tags}
           target="_self"
           badge={post.data.badge}
         />
