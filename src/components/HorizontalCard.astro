@@ -32,11 +32,9 @@ const slideFilePath = `/slide/${slideUrl}.pdf`;
         <h2 class="text-xl">
           {auther}
         </h2>
-        <p class="py-1 text-1xl">{pubDate}</p>
-        <p class="py-1 text-1xl">{desc}</p>
         {
           paperUrl && (
-            <a href={paperUrl} target="_blank" class="badge badge-primary no-underline  my-1">
+            <a href={paperUrl} target="_blank" class="badge badge-primary hover:bg-opacity-50 no-underline  my-1">
               {" "}
               Paper
             </a>
@@ -44,12 +42,13 @@ const slideFilePath = `/slide/${slideUrl}.pdf`;
         }
          {
           slideUrl && (
-            <a href={slideFilePath} target="_blank" class="badge badge-primary no-underline  my-1">
+            <a href={slideFilePath} target="_blank" class="badge badge-primary hover:bg-opacity-50 no-underline  my-1">
               {" "}
               Slide
             </a>
             )
-        }
+        }<p class="py-1 text-1xl">{pubDate}</p>
+        <p class="py-1 text-1xl">{desc}</p>
         <div class="card-actions justify-end">
           {
             tags &&

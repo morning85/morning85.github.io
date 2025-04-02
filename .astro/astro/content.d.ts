@@ -150,48 +150,48 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"blog": {
+		"publications": {
 "eacl2023.md": {
 	id: "eacl2023.md";
   slug: "eacl2023";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "publications";
+  data: InferEntrySchema<"publications">
 } & { render(): Render[".md"] };
 "matsubara_nlp2025.md": {
 	id: "matsubara_nlp2025.md";
   slug: "matsubara_nlp2025";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "publications";
+  data: InferEntrySchema<"publications">
 } & { render(): Render[".md"] };
 "saeki_nlp2025.md": {
 	id: "saeki_nlp2025.md";
   slug: "saeki_nlp2025";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "publications";
+  data: InferEntrySchema<"publications">
 } & { render(): Render[".md"] };
 "tomita_jsai2023.md": {
 	id: "tomita_jsai2023.md";
   slug: "tomita_jsai2023";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "publications";
+  data: InferEntrySchema<"publications">
 } & { render(): Render[".md"] };
 "tomita_nlp2024.md": {
 	id: "tomita_nlp2024.md";
   slug: "tomita_nlp2024";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "publications";
+  data: InferEntrySchema<"publications">
 } & { render(): Render[".md"] };
 "tomita_nlp2025.md": {
 	id: "tomita_nlp2025.md";
   slug: "tomita_nlp2025";
   body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
+  collection: "publications";
+  data: InferEntrySchema<"publications">
 } & { render(): Render[".md"] };
 };
 "store": {

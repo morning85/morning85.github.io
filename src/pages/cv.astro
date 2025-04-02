@@ -9,9 +9,7 @@ import createSlug from "../lib/createSlug"
 import dayjs from "dayjs";
 
 
-// const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const posts = (await getCollection("blog"))
+const posts = (await getCollection("publications"))
   .filter((post) =>
     post.data.auther.startsWith("Asa Tomita") || post.data.auther.startsWith("富田 朝")
   )
@@ -76,13 +74,13 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
     title="Fujitsu, Ltd."
     subtitle="August 2023 - September 2023"
   >
-  Software Engineer
+  Research and Development
   </TimeLineElement>
     <TimeLineElement
     title="HIHITI, Inc."
     subtitle="May 2021 - November 2021"
   >
-  Software Engineer
+  Frontend Engineer
   </TimeLineElement>
   </div>
   <div class="mb-5">
@@ -120,7 +118,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
           auther={post.data.auther}
           desc={post.data.description}
           pubDate={dayjs(post.data.pubDate).format("ll")}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          url={"/publications/" + createSlug(post.data.title, post.slug)}
           paperUrl={post.data.paperUrl}
           slideUrl={post.data.slideUrl}
           tags={post.data.tags}

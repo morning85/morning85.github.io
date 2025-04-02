@@ -1,10 +1,10 @@
 ---
-import { type BlogSchema } from "../content/config";
+import { type PublicationSchema } from "../content/config";
 import BaseLayout from "./BaseLayout.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
-export interface Props extends BlogSchema {}
+export interface Props extends PublicationSchema {}
 
 const { title, auther, description, pubDate, updatedDate, heroImage, paperUrl, slideUrl, badge, tags = [] } = Astro.props;
 dayjs.extend(localizedFormat);
@@ -26,7 +26,7 @@ import { Image } from "astro:assets";
       {
         tags &&
           tags.map((tag) => (
-            <a href={`/blog/tag/${tag}`} class="badge badge-outline ml-2 no-underline">
+            <a href={`/publications/tag/${tag}`} class="badge badge-outline ml-2 no-underline">
               {tag}
             </a>
           ))
@@ -41,7 +41,7 @@ import { Image } from "astro:assets";
       }
       {
         paperUrl && (
-          <a href={paperUrl} target="_blank" class="badge badge-primary no-underline  my-1">
+          <a href={paperUrl} target="_blank" class="badge badge-primary  hover:bg-opacity-50 no-underline  my-1 ">
             {" "}
             Paper
           </a>
@@ -49,7 +49,7 @@ import { Image } from "astro:assets";
       }
        {
         slideUrl && (
-          <a href={slideFilePath} target="_blank" class="badge badge-primary no-underline  my-1">
+          <a href={slideFilePath} target="_blank" class="badge badge-primary hover:bg-opacity-50 no-underline  my-1">
             {" "}
             Slide
           </a>
