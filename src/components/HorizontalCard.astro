@@ -1,9 +1,12 @@
 ---
-const { title, auther, img, desc, url, badge, tags, pubDate, paperUrl, slideUrl,target = "_blank" } = Astro.props;
+const { title, auther="", img, desc, url, badge, tags, pubDate, paperUrl, slideUrl,target = "_blank" } = Astro.props;
 import { Image } from "astro:assets";
 const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
 
 const slideFilePath = `/slide/${slideUrl}.pdf`;
+
+// 正規表現で「富田」または「tomita」を検索し、該当部分を装飾
+const highlightedAutherParts = auther.split(/(富田 朝|Asa Tomita)/gi);
 
 ---
 
@@ -25,13 +28,21 @@ const slideFilePath = `/slide/${slideUrl}.pdf`;
         )
       } -->
       <div class="grow w-full">
-        <h1 class="text-xl font-bold">
+        <h1 class="text-2xl font-bold">
           {title}
           {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
         </h1>
-        <h2 class="text-xl">
-          {auther}
-        </h2>
+        <h3 class="title my-2 text-xl">
+          {
+            highlightedAutherParts.map((part) =>
+              part.match(/(富田 朝|Asa Tomita)/gi) ? (
+                <span class="underline">{part}</span>
+              ) : (
+                part
+              )
+            )
+          }
+        </h3>
         {
           paperUrl && (
             <a href={paperUrl} target="_blank" class="badge badge-primary hover:bg-opacity-50 no-underline  my-1">
