@@ -9,7 +9,7 @@ export interface Props extends BlogSchema {}
 const { title, auther, description, pubDate, updatedDate, heroImage, paperUrl, slideUrl, badge, tags = [] } = Astro.props;
 dayjs.extend(localizedFormat);
 const displayDate = dayjs(pubDate).format("ll")
-const slideFilePath = `../public/slide/${slideUrl}.pdf`;
+const slideFilePath = `/public/slide/${slideUrl}.pdf`;
 
 import { Image } from "astro:assets";
 ---

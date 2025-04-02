@@ -3,7 +3,7 @@ const { title, auther, img, desc, url, badge, tags, pubDate, paperUrl, slideUrl,
 import { Image } from "astro:assets";
 const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
 
-const slideFilePath = `../public/slide/${slideUrl}.pdf`;
+const slideFilePath = `/public/slide/${slideUrl}.pdf`;
 
 ---
 
