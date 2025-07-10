@@ -172,9 +172,23 @@ declare module 'astro:content' {
   collection: "publications";
   data: InferEntrySchema<"publications">
 } & { render(): Render[".md"] };
+"tlt2025.md": {
+	id: "tlt2025.md";
+  slug: "tlt2025";
+  body: string;
+  collection: "publications";
+  data: InferEntrySchema<"publications">
+} & { render(): Render[".md"] };
 "tomita_jsai2023.md": {
 	id: "tomita_jsai2023.md";
   slug: "tomita_jsai2023";
+  body: string;
+  collection: "publications";
+  data: InferEntrySchema<"publications">
+} & { render(): Render[".md"] };
+"tomita_jsai2025.md": {
+	id: "tomita_jsai2025.md";
+  slug: "tomita_jsai2025";
   body: string;
   collection: "publications";
   data: InferEntrySchema<"publications">
