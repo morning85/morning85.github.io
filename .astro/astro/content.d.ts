@@ -217,6 +217,29 @@ declare module 'astro:content' {
   data: InferEntrySchema<"store">
 } & { render(): Render[".md"] };
 };
+"talks": {
+"esslli2025.md": {
+	id: "esslli2025.md";
+  slug: "esslli2025";
+  body: string;
+  collection: "talks";
+  data: InferEntrySchema<"talks">
+} & { render(): Render[".md"] };
+"naloma.md": {
+	id: "naloma.md";
+  slug: "naloma";
+  body: string;
+  collection: "talks";
+  data: InferEntrySchema<"talks">
+} & { render(): Render[".md"] };
+"openCampus.md": {
+	id: "openCampus.md";
+  slug: "opencampus";
+  body: string;
+  collection: "talks";
+  data: InferEntrySchema<"talks">
+} & { render(): Render[".md"] };
+};
 
 	};
 

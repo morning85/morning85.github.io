@@ -14,6 +14,22 @@ const publicationSchema = z.object({
     }).optional(),
 });
 
+const talkSchema = z.object({
+    title: z.string(),
+    auther: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.string().optional(),
+    paperUrl: z.string().optional(),
+    slideUrl: z.string().optional(),
+    heroImage: z.string().optional(),
+    badge: z.string().optional(),
+    tags: z.array(z.string()).refine(items => new Set(items).size === items.length, {
+        message: 'tags must be unique',
+    }).optional(),
+});
+
+
 const storeSchema = z.object({
     title: z.string(),
     description: z.string(),
@@ -28,12 +44,15 @@ const storeSchema = z.object({
 });
 
 export type PublicationSchema = z.infer<typeof publicationSchema>;
+export type TalkSchema = z.infer<typeof talkSchema>;
 export type StoreSchema = z.infer<typeof storeSchema>;
 
 const publicationCollection = defineCollection({ schema: publicationSchema });
+const talkCollection = defineCollection({ schema: talkSchema });
 const storeCollection = defineCollection({ schema: storeSchema });
 
 export const collections = {
     'publications': publicationCollection,
+    'talks': talkCollection,
     'store': storeCollection
 }

@@ -7,7 +7,7 @@ import dayjs, { Ls } from "dayjs";
 
 
 export async function getStaticPaths({ paginate }) {
-  const posts = await getCollection("publications");
+  const posts = await getCollection("talks");
   posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
   return paginate(posts, { pageSize: 10 });
 }
@@ -24,9 +24,9 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 ---
 
-<BaseLayout title="Publications" sideBarActiveItemID="publications">
+<BaseLayout title="Publications" sideBarActiveItemID="talks">
   <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Publications</div>
+    <div class="text-3xl w-full font-bold">Talks</div>
   </div>
 
   {
@@ -47,7 +47,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
               img={post.data.heroImage}
               pubDate={dayjs(post.data.pubDate).format("ll")}
               desc={post.data.description}
-              url={"/publications/" + createSlug(post.data.title, post.slug)}
+              url={"/talks/" + createSlug(post.data.title, post.slug)}
               target="_self"
               badge={post.data.badge}
               tags={post.data.tags}
