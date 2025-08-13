@@ -1,6 +1,6 @@
 ---
 title: "Natural Language Inference with CCG Parser and Automated Theorem Prover for DTS"
-auther: "Asa Tomita, Hitomi Yanaka, Daisuke Bekki"
+auther: "Asa Tomita, Mai Matsubara, Hinari Daido, Daisuke Bekki"
 description: "In Proceedings of the 2nd Workshop on Bridges and Gaps between Formal and Computational Linguistics (BriGap-2)"
 pubDate: "September 24 2025"
 paperUrl: ""
