@@ -1,4 +1,5 @@
 import { z, defineCollection } from "astro:content";
+
 const publicationSchema = z.object({
     title: z.string(),
     auther: z.string(),

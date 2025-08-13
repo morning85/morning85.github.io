@@ -151,6 +151,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"publications": {
+"brigap2.md": {
+	id: "brigap2.md";
+  slug: "brigap2";
+  body: string;
+  collection: "publications";
+  data: InferEntrySchema<"publications">
+} & { render(): Render[".md"] };
 "eacl2023.md": {
 	id: "eacl2023.md";
   slug: "eacl2023";
@@ -218,6 +225,20 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "talks": {
+"crest2024.md": {
+	id: "crest2024.md";
+  slug: "crest2024";
+  body: string;
+  collection: "talks";
+  data: InferEntrySchema<"talks">
+} & { render(): Render[".md"] };
+"crest2025.md": {
+	id: "crest2025.md";
+  slug: "crest2025";
+  body: string;
+  collection: "talks";
+  data: InferEntrySchema<"talks">
+} & { render(): Render[".md"] };
 "esslli2025.md": {
 	id: "esslli2025.md";
   slug: "esslli2025";
