@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 
 const posts = (await getCollection("publications"))
   .filter((post) =>
-    post.data.auther.startsWith("Asa Tomita") || post.data.auther.startsWith("富田 朝")
+   (post.data.auther.startsWith("Asa Tomita") || post.data.auther.startsWith("富田 朝")) && post.data.tags?.includes("Peer-Reviewed")
   )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -148,22 +148,21 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 <HorizontalShopItem
 title="次世代AI人材育成プロジェクト（BOOST）"
-img="/post_img.webp"
 desc="異種専門知識の融合と価値観の多様性に基づく次世代AI開発人材の育成"
 pricing="¥250,000 / month + ¥900,000 / year"
+url="https://www.jst.go.jp/jisedai/boost-s/"
 />
+<div class="divider my-0" />
 <HorizontalShopItem
 title="次世代研究者挑戦的研究プログラム（SPRING）"
-img="/post_img.webp"
 desc="「革新」×「共創」で未来を拓く女性博士育成プロジェクト T-COCOA"
 pricing="¥200,000 / month + ¥200,000 / year"
+url="https://www.jst.go.jp/jisedai/spring/"
 badge="CANCELLED"
 />
+<div class="divider my-0" />
 
-<div>
-  <div class="text-3xl w-full font-bold mb-2">Skills</div>
-</div>
-
+<div class="text-3xl w-full font-bold mb-2 mt-10">Skills</div>
 <ul class="list-disc md:columns-3 mx-6">
   <li>Haskell</li>
   <li>Python</li>

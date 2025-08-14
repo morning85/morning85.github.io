@@ -7,13 +7,10 @@ import dayjs, { Ls } from "dayjs";
 
 
 export async function getStaticPaths({ paginate }) {
-  const posts = await getCollection("talks");
-  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-  return paginate(posts, { pageSize: 10 });
+  const talks = await getCollection("talks");
+  talks.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  return paginate(talks, { pageSize: 10 });
 }
-
-const talks = await getCollection("talks"); 
-talks.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 
 const { page } = Astro.props;
@@ -24,7 +21,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 ---
 
-<BaseLayout title="Publications" sideBarActiveItemID="talks">
+<BaseLayout title="Talks" sideBarActiveItemID="talks">
   <div class="mb-5">
     <div class="text-3xl w-full font-bold">Talks</div>
   </div>
@@ -58,34 +55,6 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
       </ul>
     )
   }
-
-<div class="mt-10">
-  <div class="text-3xl w-full font-bold">Talks</div>
-</div>
-
-{
-    <ul>
-      {talks.map((talk) => (
-        <>
-          <HorizontalCard
-            title={talk.data.title}
-            auther={talk.data.speaker}
-            paperUrl={talk.data.paperUrl}
-            slideUrl={talk.data.slideUrl}
-            img={talk.data.heroImage}
-            pubDate={dayjs(talk.data.pubDate).format("ll")}
-            desc={talk.data.description}
-            url={"/talks/" + createSlug(talk.data.title, talk.slug)}
-            target="_self"
-            badge={talk.data.badge}
-            tags={talk.data.tags}
-          />
-          <div class="divider my-0" />
-        </>
-      ))}
-    </ul>
-}
-
   <div class="flex justify-between">
     {
       page.url.prev ? (
