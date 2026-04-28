@@ -3,9 +3,9 @@ title: "Natural Language Inference with CCG Parser and Automated Theorem Prover 
 auther: "Asa Tomita, Mai Matsubara, Hinari Daido, Daisuke Bekki"
 description: "In Proceedings of the 2nd Workshop on Bridges and Gaps between Formal and Computational Linguistics (BriGap-2)"
 pubDate: "September 24 2025"
-paperUrl: ""
+paperUrl: "https://aclanthology.org/2025.brigap-1.1/"
 slideUrl: "BriGap2_slide"
-tags: ["Peer-Reviewed","国際学会"]
+tags: ["Peer-Reviewed","International"]
 
 ---
 We propose a Natural Language Inference (NLI) system based on compositional semantics. 

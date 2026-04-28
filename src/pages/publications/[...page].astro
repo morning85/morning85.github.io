@@ -2,26 +2,43 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HorizontalCard from "../../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
-import createSlug from "../../lib/createSlug"
+import createSlug from "../../lib/createSlug";
 import dayjs, { Ls } from "dayjs";
 
+function hasTag(entry, tag) {
+  return entry.data.tags?.includes(tag) ?? false;
+}
 
 export async function getStaticPaths({ paginate }) {
   const posts = await getCollection("publications");
-  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-  return paginate(posts, { pageSize: 10 });
+  const isInternational = (entry) =>
+    entry.data.tags?.includes("International") ?? false;
+  posts.sort((a, b) => {
+    const aInternational = isInternational(a);
+    const bInternational = isInternational(b);
+    if (aInternational !== bInternational) return aInternational ? -1 : 1;
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+  });
+  return paginate(posts, { pageSize: posts.length });
 }
 
-const talks = await getCollection("talks"); 
+const talks = await getCollection("talks");
 talks.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
 
 const { page } = Astro.props;
 dayjs.extend(localizedFormat);
 import localizedFormat from "dayjs/plugin/localizedFormat";
 // const displayDate = dayjs(pubDate).format("ll")
 
-
+const internationalPublications = page.data.filter((post) =>
+  hasTag(post, "International"),
+);
+const domesticPublications = page.data.filter(
+  (post) => !hasTag(post, "International") && hasTag(post, "Domestic"),
+);
+const otherPublications = page.data.filter(
+  (post) => !hasTag(post, "International") && !hasTag(post, "Domestic"),
+);
 ---
 
 <BaseLayout title="Publications" sideBarActiveItemID="publications">
@@ -33,24 +50,91 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
     page.data.length === 0 ? (
       <div class="bg-base-200 border-l-4 border-secondary w-full p-4 min-w-full">
         <p class="font-bold">Sorry!</p>
-        <p>There are no publication posts to show at the moment. Check back later!</p>
+        <p>
+          There are no publication posts to show at the moment. Check back
+          later!
+        </p>
       </div>
     ) : (
+      <>
+        {internationalPublications.length > 0 && (
+          <>
+            <div class="text-2xl w-full font-bold mt-6 mb-2">
+              International
+            </div>
+            <ul>
+              {internationalPublications.map((post) => (
+                <>
+                  <HorizontalCard
+                    title={post.data.title}
+                    auther={post.data.auther}
+                    paperUrl={post.data.paperUrl}
+                    slideUrl={post.data.slideUrl}
+                    img={post.data.heroImage}
+                    pubDate={dayjs(post.data.pubDate).format("ll")}
+                    desc={post.data.description}
+                    url={"/publications/" + createSlug(post.data.title, post.slug)}
+                    target="_self"
+                    badge={post.data.badge}
+                    tags={post.data.tags}
+                  />
+                  <div class="divider my-0" />
+                </>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {(domesticPublications.length > 0 || otherPublications.length > 0) && (
+          <>
+            <div class="text-2xl w-full font-bold mt-6 mb-2">Domestic</div>
+            <ul>
+              {[...domesticPublications, ...otherPublications].map((post) => (
+                <>
+                  <HorizontalCard
+                    title={post.data.title}
+                    auther={post.data.auther}
+                    paperUrl={post.data.paperUrl}
+                    slideUrl={post.data.slideUrl}
+                    img={post.data.heroImage}
+                    pubDate={dayjs(post.data.pubDate).format("ll")}
+                    desc={post.data.description}
+                    url={"/publications/" + createSlug(post.data.title, post.slug)}
+                    target="_self"
+                    badge={post.data.badge}
+                    tags={post.data.tags}
+                  />
+                  <div class="divider my-0" />
+                </>
+              ))}
+            </ul>
+          </>
+        )}
+      </>
+    )
+  }
+
+  <div class="mt-10">
+    <div class="text-3xl w-full font-bold">Talks</div>
+  </div>
+
+  {
+    (
       <ul>
-        {page.data.map((post) => (
+        {talks.map((talk) => (
           <>
             <HorizontalCard
-              title={post.data.title}
-              auther={post.data.auther}
-              paperUrl={post.data.paperUrl}
-              slideUrl={post.data.slideUrl}
-              img={post.data.heroImage}
-              pubDate={dayjs(post.data.pubDate).format("ll")}
-              desc={post.data.description}
-              url={"/publications/" + createSlug(post.data.title, post.slug)}
+              title={talk.data.title}
+              auther={talk.data.speaker}
+              paperUrl={talk.data.paperUrl}
+              slideUrl={talk.data.slideUrl}
+              img={talk.data.heroImage}
+              pubDate={dayjs(talk.data.pubDate).format("ll")}
+              desc={talk.data.description}
+              url={"/talks/" + createSlug(talk.data.title, talk.slug)}
               target="_self"
-              badge={post.data.badge}
-              tags={post.data.tags}
+              badge={talk.data.badge}
+              tags={talk.data.tags}
             />
             <div class="divider my-0" />
           </>
@@ -58,33 +142,6 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
       </ul>
     )
   }
-
-<div class="mt-10">
-  <div class="text-3xl w-full font-bold">Talks</div>
-</div>
-
-{
-    <ul>
-      {talks.map((talk) => (
-        <>
-          <HorizontalCard
-            title={talk.data.title}
-            auther={talk.data.speaker}
-            paperUrl={talk.data.paperUrl}
-            slideUrl={talk.data.slideUrl}
-            img={talk.data.heroImage}
-            pubDate={dayjs(talk.data.pubDate).format("ll")}
-            desc={talk.data.description}
-            url={"/talks/" + createSlug(talk.data.title, talk.slug)}
-            target="_self"
-            badge={talk.data.badge}
-            tags={talk.data.tags}
-          />
-          <div class="divider my-0" />
-        </>
-      ))}
-    </ul>
-}
 
   <div class="flex justify-between">
     {

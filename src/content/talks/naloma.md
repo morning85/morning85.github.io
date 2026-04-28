@@ -5,7 +5,7 @@ auther: "Asa Tomita, Hitomi Yanaka, Daisuke Bekki"
 pubDate: "August 7 2025"
 # paperUrl: "https://aclanthology.org/2024.eacl-srw.14/"
 slideUrl: "NALOMA2025_slides"
-tags: [国際学会]
+tags: ["International"]
 
 ---
 

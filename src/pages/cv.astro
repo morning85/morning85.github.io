@@ -5,13 +5,15 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
 import HorizontalShopItem from "@components/HorizontalShopItem.astro";
 import { getCollection } from "astro:content";
-import createSlug from "../lib/createSlug"
+import createSlug from "../lib/createSlug";
 import dayjs from "dayjs";
 
-
 const posts = (await getCollection("publications"))
-  .filter((post) =>
-   (post.data.auther.startsWith("Asa Tomita") || post.data.auther.startsWith("富田 朝")) && post.data.tags?.includes("Peer-Reviewed")
+  .filter(
+    (post) =>
+      (post.data.auther.startsWith("Asa Tomita") ||
+        post.data.auther.startsWith("富田 朝")) &&
+      post.data.tags?.includes("Peer-Reviewed"),
   )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -22,7 +24,6 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 // const displayDate = dayjs(pubDate).format("ll")
 ---
 
-
 <BaseLayout title="Resume" sideBarActiveItemID="cv">
   <div class="pb-12 mt-5">
     <!-- <div class="text-xl py-1">Hey there 👋</div> -->
@@ -30,106 +31,109 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
     <!-- <div class="text-3xl py-3 font-bold">Ph.D student @ Ochanomizu University </div> -->
     <div class="py-2">
       <text class="text-lg">
-        1st year Ph.D. student at Graduate School of Humanities and Sciences, Ochanomizu University Bekki Laboratory.
+        2nd year Ph.D. student at Graduate School of Humanities and Sciences,
+        Ochanomizu University Bekki Laboratory.
       </text>
     </div>
-  <!-- <div class="mb-5">
+    <!-- <div class="mb-5">
     <div class="text-3xl w-full font-bold">Profile</div>
   </div> -->
 
-  <div class="mb-10 text-justify">
-    <!-- 1st year Ph.D. student at Graduate School of Humanities and Sciences, Ochanomizu University Bekki Laboratory. -->
-  </div>
+    <div class="mb-10 text-justify">
+      <!-- 1st year Ph.D. student at Graduate School of Humanities and Sciences, Ochanomizu University Bekki Laboratory. -->
+    </div>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Education</div>
-  </div>
+    <div class="mb-5">
+      <div class="text-3xl w-full font-bold">Education</div>
+    </div>
 
-  <div class="time-line-container grid gap-4 mb-10">
-    <TimeLineElement
-      title="Ph.D. Candidate, Department of Advanced Sciences, Graduate School of Humanities and Sciences,  Ochanomizu University, Japan"
-      subtitle="April 2025 - Present"
-    />
-    <TimeLineElement
-      title="Master's Degree, Department of Advanced Sciences, Graduate School of Humanities and Sciences,  Ochanomizu University, Japan"
-      subtitle="April 2023 - March 2025"
-    />
-    <TimeLineElement
-      title="Bachelor's Degree, Department of Information Science, School of Science, Ochanomizu University, Japan"
-      subtitle="April 2019 - March 2023"
-    />
-  </div>
+    <div class="time-line-container grid gap-4 mb-10">
+      <TimeLineElement
+        title="Ph.D. Candidate, Department of Advanced Sciences, Graduate School of Humanities and Sciences,  Ochanomizu University, Japan"
+        subtitle="April 2025 - Present"
+      />
+      <TimeLineElement
+        title="Master's Degree, Department of Advanced Sciences, Graduate School of Humanities and Sciences,  Ochanomizu University, Japan"
+        subtitle="April 2023 - March 2025"
+      />
+      <TimeLineElement
+        title="Bachelor's Degree, Department of Information Science, School of Science, Ochanomizu University, Japan"
+        subtitle="April 2019 - March 2023"
+      />
+    </div>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Internships</div>
-  </div>
-  <div class="time-line-container mb-10">
-    <TimeLineElement
-      title="Jool, Corp."
-      subtitle="December 2023 - Present"
-    >
-    Software Engineer
-    </TimeLineElement>
-    <TimeLineElement
-    title="Fujitsu, Ltd."
-    subtitle="August 2023 - September 2023"
-  >
-  Research and Development
-  </TimeLineElement>
-    <TimeLineElement
-    title="HIHITI, Inc."
-    subtitle="May 2021 - November 2021"
-  >
-  Frontend Engineer
-  </TimeLineElement>
-  </div>
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Experience</div>
-  </div>
-  <div class="time-line-container mb-10">
-    <TimeLineElement
-    title="Ochanomizu University Senior High School"
-    subtitle="April 2023 - Present"
-  >
-  School Teaching Assistant of Informatics
-  </TimeLineElement>
-  <TimeLineElement
-    title="Ochanomizu University"
-    subtitle="September 2023 - February 2024"
-  >
-  Teaching Assistant of General Topology
-  </TimeLineElement>
-  <TimeLineElement
-    title="Open Hack U 2022"
-    subtitle="August 2022"
-  >
-  Online Hackathon
-  </TimeLineElement>
-  </div>
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest Publications</div>
-  </div>
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          auther={post.data.auther}
-          desc={post.data.description}
-          pubDate={dayjs(post.data.pubDate).format("ll")}
-          url={"/publications/" + createSlug(post.data.title, post.slug)}
-          paperUrl={post.data.paperUrl}
-          slideUrl={post.data.slideUrl}
-          tags={post.data.tags}
-          target="_self"
-          badge={post.data.badge}
+    <div class="mb-5">
+      <div class="text-3xl w-full font-bold">Internships</div>
+    </div>
+    <div class="time-line-container mb-10">
+      <TimeLineElement title="Jool, Corp." subtitle="December 2023 - Present">
+        Software Engineer
+      </TimeLineElement>
+      <TimeLineElement
+        title="Fujitsu, Ltd."
+        subtitle="August 2023 - September 2023"
+      >
+        Research and Development
+      </TimeLineElement>
+      <TimeLineElement title="HIHITI, Inc." subtitle="May 2021 - November 2021">
+        Frontend Engineer
+      </TimeLineElement>
+    </div>
+    <div class="mb-5">
+      <div class="text-3xl w-full font-bold">Experience</div>
+    </div>
+    <div class="time-line-container mb-10">
+      <TimeLineElement
+        title="Guest Ph.D candidate"
+        subtitle="March 2026 - June 2026"
+      >
+        Utrecht University, Netherlands. <br />
+        Faculty of Humanities, Department of Language, Literature and Communication,<br
         />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
-  <!-- <div>
+        Institute for Language Sciences (ILS)
+      </TimeLineElement>
+      <TimeLineElement
+        title="School Teaching Assistant of Informatics"
+        subtitle="April 2023 - Present"
+      >
+        Ochanomizu University Senior High School
+      </TimeLineElement>
+      <TimeLineElement
+        title="Teaching Assistant of General Topology"
+        subtitle="September 2023 - February 2024"
+      >
+        Ochanomizu University
+      </TimeLineElement>
+      <TimeLineElement title="Open Hack U 2022" subtitle="August 2022">
+        Online Hackathon
+      </TimeLineElement>
+    </div>
+
+    <div>
+      <div class="text-3xl w-full font-bold mb-5 mt-10">
+        Latest Publications
+      </div>
+    </div>
+    {
+      last_posts.map((post) => (
+        <>
+          <HorizontalCard
+            title={post.data.title}
+            auther={post.data.auther}
+            desc={post.data.description}
+            pubDate={dayjs(post.data.pubDate).format("ll")}
+            url={"/publications/" + createSlug(post.data.title, post.slug)}
+            paperUrl={post.data.paperUrl}
+            slideUrl={post.data.slideUrl}
+            tags={post.data.tags}
+            target="_self"
+            badge={post.data.badge}
+          />
+          <div class="divider my-0" />
+        </>
+      ))
+    }
+    <!-- <div>
     <div class="text-3xl w-full font-bold mb-2"> Publication </div>
   </div>
 
@@ -139,37 +143,36 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
     url="#"
     auther="Asa Tomita, Yanaka Hitomi, Daisuke Bekki"
   /> -->
+  </div>
 
-</BaseLayout>
+  <div>
+    <div class="text-3xl w-full font-bold mb-2">Grants</div>
+  </div>
 
-<div>
-  <div class="text-3xl w-full font-bold mb-2">Grants</div>
-</div>
+  <HorizontalShopItem
+    title="次世代AI人材育成プロジェクト（BOOST）"
+    desc="異種専門知識の融合と価値観の多様性に基づく次世代AI開発人材の育成"
+    pricing="¥250,000 / month + ¥900,000 / year"
+    url="https://www.jst.go.jp/jisedai/boost-s/"
+  />
+  <div class="divider my-0"></div>
+  <HorizontalShopItem
+    title="次世代研究者挑戦的研究プログラム（SPRING）"
+    desc="「革新」×「共創」で未来を拓く女性博士育成プロジェクト T-COCOA"
+    pricing="¥200,000 / month + ¥200,000 / year"
+    url="https://www.jst.go.jp/jisedai/spring/"
+    badge="CANCELLED"
+  />
+  <div class="divider my-0"></div>
 
-<HorizontalShopItem
-title="次世代AI人材育成プロジェクト（BOOST）"
-desc="異種専門知識の融合と価値観の多様性に基づく次世代AI開発人材の育成"
-pricing="¥250,000 / month + ¥900,000 / year"
-url="https://www.jst.go.jp/jisedai/boost-s/"
-/>
-<div class="divider my-0" />
-<HorizontalShopItem
-title="次世代研究者挑戦的研究プログラム（SPRING）"
-desc="「革新」×「共創」で未来を拓く女性博士育成プロジェクト T-COCOA"
-pricing="¥200,000 / month + ¥200,000 / year"
-url="https://www.jst.go.jp/jisedai/spring/"
-badge="CANCELLED"
-/>
-<div class="divider my-0" />
-
-<div class="text-3xl w-full font-bold mb-2 mt-10">Skills</div>
-<ul class="list-disc md:columns-3 mx-6">
-  <li>Haskell</li>
-  <li>Python</li>
-  <li>Javascript</li>
-  <li>Natual Language Processing</li>
-</ul>
-<!-- <div class="mb-5">
+  <div class="text-3xl w-full font-bold mb-2 mt-10">Skills</div>
+  <ul class="list-disc md:columns-3 mx-6">
+    <li>Haskell</li>
+    <li>Python</li>
+    <li>Javascript</li>
+    <li>Natual Language Processing</li>
+  </ul>
+  <!-- <div class="mb-5">
   <div class="text-3xl w-full font-bold">Grants</div>
 </div>
 
@@ -181,3 +184,4 @@ badge="CANCELLED"
     <a href="#" target="_blank"> Certification Name (with link)</a>
   </li>
 </ul> -->
+</BaseLayout>
