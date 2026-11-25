@@ -1,133 +1,80 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-// import HorizontalCard from "../components/HorizontalShopItem.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
-import TimeLineElement from "../components/cv/TimeLine.astro";
 import HorizontalShopItem from "@components/HorizontalShopItem.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug";
 import dayjs from "dayjs";
-
-const posts = (await getCollection("publications"))
-  .filter(
-    (post) =>
-      (post.data.auther.startsWith("Asa Tomita") ||
-        post.data.auther.startsWith("富田 朝")) &&
-      post.data.tags?.includes("Peer-Reviewed"),
-  )
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const last_posts = posts.slice(0, 3);
+import localizedFormat from "dayjs/plugin/localizedFormat";
 
 dayjs.extend(localizedFormat);
-import localizedFormat from "dayjs/plugin/localizedFormat";
-// const displayDate = dayjs(pubDate).format("ll")
+
+const isMe = (auther: string) =>
+  auther.startsWith("Asa Tomita") || auther.startsWith("富田 朝");
+
+const latestPublications = (await getCollection("publications"))
+  .filter(
+    (post) => isMe(post.data.auther) && post.data.tags?.includes("Peer-Reviewed"),
+  )
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const selectedTalks = (await getCollection("talks"))
+  .filter((talk) => talk.data.tags?.includes("International"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout title="Resume" sideBarActiveItemID="cv">
   <div class="pb-12 mt-5">
-    <!-- <div class="text-xl py-1">Hey there 👋</div> -->
     <div class="text-5xl font-bold">Asa Tomita</div>
-    <!-- <div class="text-3xl py-3 font-bold">Ph.D student @ Ochanomizu University </div> -->
-    <div class="py-2">
-      <text class="text-lg">
+    <div class="py-2 mb-10">
+      <p class="text-lg">
         2nd year Ph.D. student at Graduate School of Humanities and Sciences,
         Ochanomizu University Bekki Laboratory.
-      </text>
-    </div>
-    <!-- <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Profile</div>
-  </div> -->
-
-    <div class="mb-10 text-justify">
-      <!-- 1st year Ph.D. student at Graduate School of Humanities and Sciences, Ochanomizu University Bekki Laboratory. -->
+      </p>
     </div>
 
-    <div class="mb-5">
-      <div class="text-3xl w-full font-bold">Education</div>
-    </div>
-
+    <!-- Education -->
+    <div class="text-3xl w-full font-bold mb-5">Education</div>
     <div class="time-line-container grid gap-4 mb-10">
       <TimeLineElement
-        title="Ph.D. Candidate, Department of Advanced Sciences, Graduate School of Humanities and Sciences,  Ochanomizu University, Japan"
-        subtitle="April 2025 - Present"
-      />
+        title="Ph.D. Student, Department of Advanced Sciences, Graduate School of Humanities and Sciences, Ochanomizu University, Japan"
+        subtitle="April 2025 – Present"
+      >
+        Supervisor: Prof. Daisuke Bekki
+      </TimeLineElement>
       <TimeLineElement
-        title="Master's Degree, Department of Advanced Sciences, Graduate School of Humanities and Sciences,  Ochanomizu University, Japan"
-        subtitle="April 2023 - March 2025"
-      />
+        title="Master's Degree, Department of Advanced Sciences, Graduate School of Humanities and Sciences, Ochanomizu University, Japan"
+        subtitle="April 2023 – March 2025"
+      >
+        Supervisor: Prof. Daisuke Bekki
+      </TimeLineElement>
       <TimeLineElement
         title="Bachelor's Degree, Department of Information Science, School of Science, Ochanomizu University, Japan"
-        subtitle="April 2019 - March 2023"
-      />
+        subtitle="April 2019 – March 2023"
+      >
+        Supervisor: Prof. Daisuke Bekki
+      </TimeLineElement>
     </div>
 
-    <div class="mb-5">
-      <div class="text-3xl w-full font-bold">Internships</div>
-    </div>
+    <!-- Research Experience -->
+    <div class="text-3xl w-full font-bold mb-5">Research Experience</div>
     <div class="time-line-container mb-10">
       <TimeLineElement
-        title="Recruit Co., Ltd."
-        subtitle="August 2026 - September 2026"
+        title="Guest Ph.D. Candidate, Utrecht University, Netherlands"
+        subtitle="March 2026 – June 2026"
       >
-        <a
-          href="https://www.recruit.co.jp/employment/students/internship/dsintern/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          RECRUIT INTERNSHIP for Data Specialists 2026
-        </a>
-      </TimeLineElement>
-      <TimeLineElement title="Jool, Corp." subtitle="December 2023 - Present">
-        Software Engineer
-      </TimeLineElement>
-      <TimeLineElement
-        title="Fujitsu, Ltd."
-        subtitle="August 2023 - September 2023"
-      >
-        Research and Development
-      </TimeLineElement>
-      <TimeLineElement title="HIHITI, Inc." subtitle="May 2021 - November 2021">
-        Frontend Engineer
-      </TimeLineElement>
-    </div>
-    <div class="mb-5">
-      <div class="text-3xl w-full font-bold">Experience</div>
-    </div>
-    <div class="time-line-container mb-10">
-      <TimeLineElement
-        title="Guest Ph.D candidate"
-        subtitle="March 2026 - June 2026"
-      >
-        Utrecht University, Netherlands. <br />
-        Faculty of Humanities, Department of Language, Literature and Communication,<br
-        />
+        Faculty of Humanities, Department of Language, Literature and
+        Communication,<br />
         Institute for Language Sciences (ILS)
       </TimeLineElement>
-      <TimeLineElement
-        title="School Teaching Assistant of Informatics"
-        subtitle="April 2023 - Present"
-      >
-        Ochanomizu University Senior High School
-      </TimeLineElement>
-      <TimeLineElement
-        title="Teaching Assistant of General Topology"
-        subtitle="September 2023 - February 2024"
-      >
-        Ochanomizu University
-      </TimeLineElement>
-      <TimeLineElement title="Open Hack U 2022" subtitle="August 2022">
-        Online Hackathon
-      </TimeLineElement>
     </div>
 
-    <div>
-      <div class="text-3xl w-full font-bold mb-5 mt-10">
-        Latest Publications
-      </div>
-    </div>
+    <!-- Publications -->
+    <div class="text-3xl w-full font-bold mb-5">Latest Publications</div>
     {
-      last_posts.map((post) => (
+      latestPublications.map((post) => (
         <>
           <HorizontalCard
             title={post.data.title}
@@ -145,55 +92,142 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
         </>
       ))
     }
-    <!-- <div>
-    <div class="text-3xl w-full font-bold mb-2"> Publication </div>
+    <div class="flex justify-end mt-3 mb-10">
+      <a href="/publications" class="link font-semibold">More publications →</a>
+    </div>
+
+    <!-- Talks -->
+    <div class="text-3xl w-full font-bold mb-5">Selected Talks</div>
+    {
+      selectedTalks.map((talk) => (
+        <>
+          <HorizontalCard
+            title={talk.data.title}
+            auther={talk.data.auther}
+            desc={talk.data.description}
+            pubDate={dayjs(talk.data.pubDate).format("ll")}
+            url={"/talks/" + createSlug(talk.data.title, talk.slug)}
+            paperUrl={talk.data.paperUrl}
+            slideUrl={talk.data.slideUrl}
+            tags={talk.data.tags}
+            target="_self"
+            badge={talk.data.badge}
+          />
+          <div class="divider my-0" />
+        </>
+      ))
+    }
+    <div class="flex justify-end mt-3 mb-10">
+      <a href="/talks" class="link font-semibold">More talks →</a>
+    </div>
+
+    <!-- Grants -->
+    <div class="text-3xl w-full font-bold mb-5">Grants</div>
+    <HorizontalShopItem
+      title="JST BOOST（次世代AI人材育成プロジェクト）"
+      desc="異種専門知識の融合と価値観の多様性に基づく次世代AI開発人材の育成"
+      pricing="2025 – Present"
+      url="https://www.jst.go.jp/jisedai/boost-s/"
+      hoverable={false}
+    />
+    <div class="divider my-0"></div>
+    <HorizontalShopItem
+      title="JST SPRING（次世代研究者挑戦的研究プログラム）"
+      desc="「革新」×「共創」で未来を拓く女性博士育成プロジェクト T-COCOA"
+      pricing="2025"
+      url="https://www.jst.go.jp/jisedai/spring/"
+      badge="SELECTED (DECLINED)"
+      badgeClass="bg-gray-500 border-gray-500 text-white"
+      bgClass="bg-base-100 opacity-60"
+      hoverable={false}
+    />
+    <div class="divider my-0 mb-10"></div>
+
+    <!-- Teaching -->
+    <div class="text-3xl w-full font-bold mb-5">Teaching Experience</div>
+    <div class="time-line-container mb-10">
+      <TimeLineElement
+        title="Teaching Assistant of General Topology"
+        subtitle="September 2026 – February 2027"
+      >
+        Ochanomizu University
+      </TimeLineElement>
+      <TimeLineElement
+        title="School Teaching Assistant of Informatics"
+        subtitle="April 2023 – Present"
+      >
+        Ochanomizu University Senior High School
+      </TimeLineElement>
+      <TimeLineElement
+        title="Teaching Assistant of General Topology"
+        subtitle="September 2023 – February 2024"
+      >
+        Ochanomizu University
+      </TimeLineElement>
+    </div>
+
+    <!-- Academic Service -->
+    <div class="text-3xl w-full font-bold mb-5">Academic Service</div>
+    <div class="time-line-container mb-10">
+      <TimeLineElement title="Local Organizer, LENLS22" subtitle="November 2026">
+        <a
+          href="https://lenls.github.io/lenls22/"
+          class="link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Logic and Engineering of Natural Language Semantics 22 (LENLS22)
+        </a>
+        <br />
+        Kobe University, Japan
+      </TimeLineElement>
+    </div>
+
+    <!-- Internships -->
+    <div class="text-3xl w-full font-bold mb-5">Internships</div>
+    <div class="time-line-container mb-10">
+      <TimeLineElement
+        title="Recruit Co., Ltd."
+        subtitle="August 2026 – September 2026"
+      >
+        <a
+          href="https://www.recruit.co.jp/employment/students/internship/dsintern/"
+          class="link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          RECRUIT INTERNSHIP for Data Specialists 2026
+        </a>
+      </TimeLineElement>
+      <TimeLineElement title="Jool Corp." subtitle="December 2023 – Present">
+        Software Engineer
+      </TimeLineElement>
+      <TimeLineElement
+        title="Fujitsu, Ltd."
+        subtitle="August 2023 – September 2023"
+      >
+        Research and Development
+      </TimeLineElement>
+      <TimeLineElement title="HIHITI, Inc." subtitle="May 2021 – November 2021">
+        Frontend Engineer
+      </TimeLineElement>
+    </div>
+
+    <!-- Other -->
+    <div class="text-3xl w-full font-bold mb-5">Other Activities</div>
+    <div class="time-line-container mb-10">
+      <TimeLineElement title="Open Hack U 2022" subtitle="August 2022">
+        Online Hackathon
+      </TimeLineElement>
+    </div>
+
+    <!-- Skills -->
+    <div class="text-3xl w-full font-bold mb-5">Skills</div>
+    <ul class="list-disc md:columns-3 mx-6">
+      <li>Haskell</li>
+      <li>Python</li>
+      <li>JavaScript</li>
+      <li>Natural Language Processing</li>
+    </ul>
   </div>
-
-  <HorizontalCard
-    title="Reforging : A Method for Constructing a Linguistically Valid Japanese CCG Treebank (2024)."
-    desc="In Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics: Student Research Workshop"
-    url="#"
-    auther="Asa Tomita, Yanaka Hitomi, Daisuke Bekki"
-  /> -->
-  </div>
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">Grants</div>
-  </div>
-
-  <HorizontalShopItem
-    title="次世代AI人材育成プロジェクト（BOOST）"
-    desc="異種専門知識の融合と価値観の多様性に基づく次世代AI開発人材の育成"
-    pricing="¥250,000 / month + ¥900,000 / year"
-    url="https://www.jst.go.jp/jisedai/boost-s/"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalShopItem
-    title="次世代研究者挑戦的研究プログラム（SPRING）"
-    desc="「革新」×「共創」で未来を拓く女性博士育成プロジェクト T-COCOA"
-    pricing="¥200,000 / month + ¥200,000 / year"
-    url="https://www.jst.go.jp/jisedai/spring/"
-    badge="SELECTED (DECLINED)"
-  />
-  <div class="divider my-0"></div>
-
-  <div class="text-3xl w-full font-bold mb-2 mt-10">Skills</div>
-  <ul class="list-disc md:columns-3 mx-6">
-    <li>Haskell</li>
-    <li>Python</li>
-    <li>Javascript</li>
-    <li>Natual Language Processing</li>
-  </ul>
-  <!-- <div class="mb-5">
-  <div class="text-3xl w-full font-bold">Grants</div>
-</div>
-
-<ul class="list-disc mx-6 mb-10 grid gap-2">
-  <li>
-    <a href="#" target="_blank"> 次世代AI人材育成プロジェクト <br> 異種専門知識の融合と価値観の多様性に基づく次世代AI開発人材の育成</a>
-  </li>
-  <li>
-    <a href="#" target="_blank"> Certification Name (with link)</a>
-  </li>
-</ul> -->
 </BaseLayout>

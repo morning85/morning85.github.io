@@ -5,6 +5,9 @@ const {
   desc,
   url,
   badge,
+  badgeClass = "badge-secondary",
+  bgClass = "bg-base-100",
+  hoverable = true,
   pricing,
   oldPricing,
   checkoutUrl,
@@ -15,7 +18,7 @@ const {
 import { Image } from "astro:assets";
 ---
 
-<div class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]">
+<div class={`rounded-lg ${bgClass} ${hoverable ? "hover:shadow-xl transition ease-in-out hover:scale-[102%]" : ""}`}>
 <!-- <div class="rounded-lg bg-base-100 transition ease-in-out hover:scale-[102%] hover:shadow-xl "> -->
   <a href={url}>
     <div class="hero-content flex-col md:flex-row">
@@ -34,7 +37,7 @@ import { Image } from "astro:assets";
       <div class="grow w-full p-5 md:p-0">
         <!-- <h2 class="text-lg "> -->
           {title}
-          {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
+          {badge && <div class={`badge ${badgeClass} mx-2`}>{badge}</div>}
         <!-- </h2> -->
         <div>
           <span class="text-lg mt-1"> {pricing}</span>
