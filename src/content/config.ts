@@ -31,29 +31,13 @@ const talkSchema = z.object({
 });
 
 
-const storeSchema = z.object({
-    title: z.string(),
-    description: z.string(),
-    custom_link_label: z.string(),
-    custom_link: z.string().optional(),
-    updatedDate: z.coerce.date(),
-    pricing: z.string().optional(),
-    oldPricing: z.string().optional(),
-    badge: z.string().optional(),
-    checkoutUrl: z.string().optional(),
-    heroImage: z.string().optional(),
-});
-
 export type PublicationSchema = z.infer<typeof publicationSchema>;
 export type TalkSchema = z.infer<typeof talkSchema>;
-export type StoreSchema = z.infer<typeof storeSchema>;
 
 const publicationCollection = defineCollection({ schema: publicationSchema });
 const talkCollection = defineCollection({ schema: talkSchema });
-const storeCollection = defineCollection({ schema: storeSchema });
 
 export const collections = {
     'publications': publicationCollection,
-    'talks': talkCollection,
-    'store': storeCollection
+    'talks': talkCollection
 }
